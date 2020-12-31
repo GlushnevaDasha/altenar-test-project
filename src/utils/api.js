@@ -1,4 +1,4 @@
-// import { getError } from "./functions";
+import { getError } from "./functions";
 
 const URL = `https://itunes.apple.com/search?`;
 
@@ -53,8 +53,8 @@ const apiRequestWithBody = async (method, url, data, token = null) => {
       if (response.status !== 200) {
         return {
           error: true,
-          code: response.status
-          //  message: getError(response.status)
+          code: response.status,
+          message: getError(response.status)
         };
       } else {
         return Promise.resolve(response);
@@ -137,8 +137,5 @@ const apiRequestWithBody = async (method, url, data, token = null) => {
 // };
 // Search all
 export const getSearchAll = async data => {
-  return await apiRequestWithBody(
-    "POST",
-    `${URL}term=${data ? data : "spirited await"}`
-  );
+  return await apiRequestWithBody("POST", `${URL}term=${data ? data : "K/DA"}`);
 };
