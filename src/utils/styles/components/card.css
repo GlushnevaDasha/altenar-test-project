@@ -1,7 +1,24 @@
 .cardContainer {
-  width: 400px;
-  height: 200px;
-  z-index: 1;
+  width: 450px;
   display: flex;
-  align-content: center;
+  margin: 10px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cover {
+  width: 200px;
 }

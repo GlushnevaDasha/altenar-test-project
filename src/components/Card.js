@@ -17,30 +17,6 @@ import "../utils/styles/components/card.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: "flex",
-      width: 450
-    },
-    details: {
-      display: "flex",
-      flexDirection: "column",
-      width: 250
-    },
-    name: {
-      whiteSpace: "nowrap",
-      overflow: "hidden" /* Обрезаем все, что не помещается в область */,
-      textOverflow: "ellipsis" /* Добавляем многоточие */
-    },
-
-    content: {
-      flex: "1 0 auto",
-      whiteSpace: "nowrap",
-      overflow: "hidden" /* Обрезаем все, что не помещается в область */,
-      textOverflow: "ellipsis" /* Добавляем многоточие */
-    },
-    cover: {
-      width: 200
-    },
     controls: {
       display: "flex",
       alignItems: "center",
@@ -96,16 +72,16 @@ export default function Cards(props) {
     //   </div>
     // </Card>
 
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component='h6' variant='h6' className={classes.name}>
+    <Card className='cardContainer'>
+      <div className='details'>
+        <CardContent className='content'>
+          <Typography component='h6' variant='h6' className='text'>
             {props.object.trackName || props.object.collectionName}
           </Typography>
           <Typography
             variant='subtitle1'
             color='textSecondary'
-            className={classes.name}
+            className='text'
           >
             {props.object.artistName}
           </Typography>
@@ -137,7 +113,7 @@ export default function Cards(props) {
         </div>
       </div>
       <CardMedia
-        className={classes.cover}
+        className='cover'
         image={props.object.artworkUrl100.replace("100x100bb", "200x200bb")}
         // title='Live from space album cover'
       />
