@@ -1,17 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import ThemeContext from "../../utils/context/Theme";
+
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  Divider,
+  Button,
+  IconButton,
+  CircularProgress,
+  TextField,
+  Grid
+} from "@material-ui/core";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+
 import Card from "../../components/Card";
 import { getSearchAll } from "../../utils/api";
-import { CustomLoader } from "../../components/Loader";
-import { noConection } from "../../utils/data";
+
+import "../../utils/styles/components/loader.css";
+import "../../utils/styles/page/home.css";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: "2px 4px",
+      display: "flex",
+      alignItems: "center",
+      margin: "0px 10px"
+      // width: 400
+    },
+    input: {
+      marginLeft: theme.spacing(1),
+      flex: 1
+    },
+    iconButton: {
+      padding: 10
+    },
+    divider: {
+      height: 28,
+      margin: 4
+    }
+  })
+);
+
 export default function Home() {
+  const theme = useContext(ThemeContext);
+
   const [mas, setMas] = useState([]);
   const [search, setSearch] = useState("");
 
   const [isFeath, setFeath] = useState(true);
-
-  // useEffect(() => {
-  //   getData();
-  // }, [mas]);
 
   async function getData() {
     setFeath(false);
@@ -27,32 +68,65 @@ export default function Home() {
     }
   }
 
+  const classes = useStyles();
+
   return (
-    <div>
-      <div className='search' style={{ display: "flex" }}>
-        <input
-          type='text'
-          placeholder={"Введите хоть что нибудь"}
-          // className="input100"
+    <div className={theme.theme ? "dark" : "white"}>
+      <div
+        className='search'
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        {/* <IconButton className={classes.iconButton} aria-label='menu'> */}
+        <MenuIcon />
+        {/* </IconButton> */}
+        <TextField
+          id='outlined-search'
+          label='Search iTunes Store'
+          type='search'
+          style={{ margin: 8 }}
+          variant='outlined'
+          fullWidth
           value={search}
           onChange={event => {
             setSearch(event.target.value);
           }}
         />
-        <button onClick={() => getData()}>Поиск</button>
+        <Button
+          style={{ margin: 8 }}
+          variant='outlined'
+          color='primary'
+          onClick={() => getData()}
+          startIcon={<SearchIcon />}
+        >
+          Поиск
+        </Button>
+        <IconButton className={classes.iconButton} aria-label='menu' onClick>
+          <ShoppingBasketIcon />
+        </IconButton>
+        <Divider className={classes.divider} orientation='vertical' />
+        <IconButton
+          className={classes.iconButton}
+          aria-label='menu'
+          onClick={() => {
+            theme.saveTheme(!theme.theme);
+          }}
+        >
+          {theme.theme ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
+        </IconButton>
       </div>
-      {isFeath ? (
-        <div>
-          {console.log("mas", mas)}
-          {mas.length !== 0
-            ? mas.map((item, index) => <Card key={index} object={item} />)
-            : null}
-        </div>
-      ) : (
-        <div>
-          <CustomLoader />
-        </div>
-      )}
+      <div className={mas.length === 0 || !isFeath ? "page" : null}>
+        {isFeath ? (
+          <Grid container direction='row' justify='center' alignItems='center'>
+            {mas.length !== 0
+              ? mas.map((item, index) => <Card key={index} object={item} />)
+              : null}
+          </Grid>
+        ) : (
+          <div className='loaderContainer'>
+            <CircularProgress />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
