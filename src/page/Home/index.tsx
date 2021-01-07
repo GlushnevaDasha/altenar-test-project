@@ -1,19 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import ThemeContext from "../../utils/context/Theme";
 
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  withStyles
+} from "@material-ui/core/styles";
 import {
   Divider,
   Button,
   IconButton,
   CircularProgress,
   TextField,
-  Grid
+  Grid,
+  Badge
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingBasket";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
@@ -22,6 +28,17 @@ import { getSearchAll } from "../../utils/api";
 
 import "../../utils/styles/components/loader.css";
 import "../../utils/styles/page/home.css";
+
+const StyledBadge = withStyles((theme: Theme) =>
+  createStyles({
+    badge: {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px"
+    }
+  })
+)(Badge);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1
     },
     iconButton: {
-      padding: 10
+      // padding: 10
     },
     divider: {
       height: 28,
@@ -71,19 +88,15 @@ export default function Home() {
   const classes = useStyles();
 
   return (
-    <div className={theme.theme ? "dark" : "white"}>
-      <div
-        className='search'
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        {/* <IconButton className={classes.iconButton} aria-label='menu'> */}
-        <MenuIcon />
-        {/* </IconButton> */}
+    <div className={theme.theme ? "white" : "dark"}>
+      <div className='search'>
+        <IconButton className={classes.iconButton} aria-label='menu'>
+          <MenuIcon />
+        </IconButton>
         <TextField
           id='outlined-search'
           label='Search iTunes Store'
           type='search'
-          style={{ margin: 8 }}
           variant='outlined'
           fullWidth
           value={search}
@@ -92,7 +105,6 @@ export default function Home() {
           }}
         />
         <Button
-          style={{ margin: 8 }}
           variant='outlined'
           color='primary'
           onClick={() => getData()}
@@ -100,8 +112,15 @@ export default function Home() {
         >
           Поиск
         </Button>
-        <IconButton className={classes.iconButton} aria-label='menu' onClick>
-          <ShoppingBasketIcon />
+        <IconButton
+          aria-label='cart'
+          onClick={() => {
+            document.location.href = "/shop";
+          }}
+        >
+          <StyledBadge badgeContent={4} color='secondary'>
+            <ShoppingCartIcon />
+          </StyledBadge>
         </IconButton>
         <Divider className={classes.divider} orientation='vertical' />
         <IconButton
@@ -111,7 +130,7 @@ export default function Home() {
             theme.saveTheme(!theme.theme);
           }}
         >
-          {theme.theme ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
+          {theme.theme ? <BrightnessLowIcon /> : <BrightnessHighIcon />}
         </IconButton>
       </div>
       <div className={mas.length === 0 || !isFeath ? "page" : null}>

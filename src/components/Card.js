@@ -5,11 +5,15 @@ import {
   makeStyles,
   useTheme
 } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography
+} from "@material-ui/core";
+
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
@@ -33,45 +37,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Cards(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const isLight = false;
-  return (
-    // <Card className='cardContainer'>
-    //   <div
-    //     style={{
-    //       // borderRadius: 15,
-    //       // margin: 10,
-    //       // boxShadow: "0 0 10px rgba(0,0,0,0.5)",
-    //       backgroundImage: `url(${props.object.artworkUrl100.replace(
-    //         "100x100bb",
-    //         "200x200bb"
-    //       )})`
-    //     }}
-    //   >
-    //     <div
-    //       style={{
-    //         width: 200,
-    //         backgroundImage: `linear-gradient(to right, rgba(255,255,255,0), ${
-    //           isLight ? "white" : "gray"
-    //         })`
-    //       }}
-    //     />
-    //     <div
-    //       style={{
-    //         padding: 5,
-    //         width: 200,
-    //         textAlign: "right",
-    //         borderTopRightRadius: 15,
-    //         borderBottomRightRadius: 15,
-    //         backgroundColor: isLight ? "white" : "gray"
-    //       }}
-    //     >
-    //       <p></p>
-    //       <p></p>
-    //       <p>{props.object.trackPrice || props.object.collectionPrice}</p>
-    //     </div>
-    //   </div>
-    // </Card>
 
+  return (
     <Card className='cardContainer'>
       <div className='details'>
         <CardContent className='content'>
@@ -115,7 +82,6 @@ export default function Cards(props) {
       <CardMedia
         className='cover'
         image={props.object.artworkUrl100.replace("100x100bb", "200x200bb")}
-        // title='Live from space album cover'
       />
     </Card>
   );

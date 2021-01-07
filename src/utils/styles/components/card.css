@@ -4,6 +4,10 @@
   margin: 10px;
 }
 
+.MuiCard-root {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 .details {
   display: flex;
   flex-direction: column;

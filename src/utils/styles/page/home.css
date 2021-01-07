@@ -17,3 +17,9 @@ body .light {
 .page {
   height: 1000vh;
 }
+
+.search {
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+}
