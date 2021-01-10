@@ -4,8 +4,8 @@
   margin: 10px;
 }
 
-.MuiCard-root {
-  background-color: rgba(0, 0, 0, 0);
+.MuiPaper-root {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .details {
@@ -25,4 +25,10 @@
 }
 .cover {
   width: 200px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  padding: 0px 0px 8px 8px;
 }

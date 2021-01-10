@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import ThemeContext from "../../utils/context/Theme";
-import BasketContext from "../../utils/context/Basket";
+import cookie from "react-cookies";
+import { BasketContext, ThemeContext } from "../../utils/context";
 
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  withStyles
-} from "@material-ui/core/styles";
+import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import {
   Divider,
   Button,
@@ -18,7 +13,6 @@ import {
   Badge
 } from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingBasket";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
@@ -41,41 +35,22 @@ const StyledBadge = withStyles((theme: Theme) =>
   })
 )(Badge);
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: "2px 4px",
-      display: "flex",
-      alignItems: "center",
-      margin: "0px 10px"
-      // width: 400
-    },
-    input: {
-      marginLeft: theme.spacing(1),
-      flex: 1
-    },
-    iconButton: {
-      // padding: 10
-    },
-    divider: {
-      height: 28,
-      margin: 4
-    }
-  })
-);
-
 export default function Home() {
   const theme = useContext(ThemeContext);
   const basket = useContext(BasketContext);
-  const [mas, setMas] = useState([]);
+  const [mas, setMas] = useState(
+    cookie.load("search") ? cookie.load("search").results : []
+  );
   const [search, setSearch] = useState("");
-  const [basketMas, setBasketMas] = useState(basket.basket.length);
 
   useEffect(() => {
-    const length = basket.basket.length;
-    basketMas !== length
-      ? setBasketMas(length)
-      : console.log("basket.basket.length useEffect", basket.basket.length);
+    console.log("useEffect", cookie.load("search"));
+    // setMas(cookie.load("search").results);
+
+    // const length = basket.basket.length;
+    // basketMas !== length
+    //   ? setBasketMas(length)
+    //   : console.log("basket.basket.length useEffect", basket.basket.length);
   });
 
   const [isFeath, setFeath] = useState(true);
@@ -87,21 +62,18 @@ export default function Home() {
       setMas(mas);
       setFeath(true);
     } else {
-      console.log("data", data);
+      cookie.save("search", { results: data.results }, { path: "/" });
+      console.log(cookie.load("search"));
       setMas(data.results);
       setFeath(true);
     }
   }
 
-  const classes = useStyles();
-
   return (
     <div className={theme.theme ? "white" : "dark"}>
-      {console.log("basket.basket.length", basket.basket.length)}
+      {console.log("basket.basket.length", basket)}
+      {console.log("theme", theme)}
       <div className='search'>
-        <IconButton className={classes.iconButton} aria-label='menu'>
-          <MenuIcon />
-        </IconButton>
         <TextField
           id='outlined-search'
           label='Search iTunes Store'
@@ -128,13 +100,12 @@ export default function Home() {
             document.location.href = "/shop";
           }}
         >
-          <StyledBadge badgeContent={basketMas} color='secondary'>
+          <StyledBadge badgeContent={basket.basket.length} color='secondary'>
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>
-        <Divider className={classes.divider} orientation='vertical' />
+        <Divider className='divider' orientation='vertical' />
         <IconButton
-          className={classes.iconButton}
           aria-label='menu'
           onClick={() => {
             theme.saveTheme(!theme.theme);

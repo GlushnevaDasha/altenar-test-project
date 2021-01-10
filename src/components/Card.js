@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import BasketContext from "../utils/context/Basket";
+import { BasketContext } from "../utils/context";
 import {
   Theme,
   createStyles,
@@ -15,23 +15,13 @@ import {
   Typography
 } from "@material-ui/core";
 
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
 import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
-import DoneSharpIcon from "@material-ui/icons/DoneSharp";
 import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
 import "../utils/styles/components/card.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    controls: {
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1)
-    },
     playIcon: {
       height: 38,
       width: 38
@@ -65,7 +55,7 @@ export default function Cards(props) {
             {" " + props.object.currency}
           </Typography>
         </CardContent>
-        <div className={classes.controls}>
+        <div className='controls'>
           <IconButton
             aria-label='previous'
             onClick={() => {
@@ -81,9 +71,6 @@ export default function Cards(props) {
               <InfoSharpIcon />
             )}
           </IconButton>
-          {/* <IconButton aria-label='play/pause'>
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton> */}
           <IconButton
             aria-label='next'
             onClick={() => {

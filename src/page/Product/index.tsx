@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import ThemeContext from "../../utils/context/Theme";
+import { ThemeContext } from "../../utils/context";
 import "../../utils/styles/page/home.css";
 import "../../utils/styles/page/product.css";
 import { getParameterFromUrl } from "../../utils/functions";
@@ -52,6 +52,7 @@ export default function Product() {
 
   return (
     <div className={theme.theme ? "white page" : "dark page"}>
+      {console.log("theme product", theme.theme)}
       {product.length !== 0 ? (
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div

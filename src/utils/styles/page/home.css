@@ -19,7 +19,17 @@ body .light {
 }
 
 .search {
-  padding: 10px 0px;
+  padding: 10px 25px;
   display: flex;
   align-items: center;
+}
+
+.divider {
+  height: 28px;
+  margin: 4px;
+}
+
+input {
+  margin: 0px 0px 8px 0px;
+  flex: 1;
 }
