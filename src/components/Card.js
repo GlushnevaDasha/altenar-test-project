@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { BasketContext } from "../utils/context";
 import {
   Theme,
@@ -46,36 +47,18 @@ export default function Cards(props) {
           </Typography>
         </CardContent>
         <div className='controls'>
-          <IconButton
-            aria-label='previous'
-            onClick={() => {
-              theme.direction === "rtl"
-                ? basket.saveBasket(props.object)
-                : props.modal();
-              //(document.location.href = `/product/?id=${props.object.trackId}`);
-              console.log("basket", basket);
-            }}
-          >
-            {theme.direction === "rtl" ? (
-              <AddShoppingCartSharpIcon />
-            ) : (
+          <Link to={`/product/?id=${props.object.trackId}`}>
+            <IconButton aria-label='previous'>
               <InfoSharpIcon />
-            )}
-          </IconButton>
+            </IconButton>
+          </Link>
           <IconButton
             aria-label='next'
             onClick={() => {
-              theme.direction === "rtl"
-                ? (document.location.href = `/product/?id=${props.object.trackId}`)
-                : basket.saveBasket(props.object);
-              console.log("basket", basket);
+              basket.saveBasket(props.object);
             }}
           >
-            {theme.direction === "rtl" ? (
-              <InfoSharpIcon />
-            ) : (
-              <AddShoppingCartSharpIcon />
-            )}
+            <AddShoppingCartSharpIcon />
           </IconButton>
         </div>
       </div>
