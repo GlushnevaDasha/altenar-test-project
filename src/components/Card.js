@@ -20,17 +20,7 @@ import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
 import "../utils/styles/components/card.css";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    playIcon: {
-      height: 38,
-      width: 38
-    }
-  })
-);
-
 export default function Cards(props) {
-  const classes = useStyles();
   const theme = useTheme();
   const basket = useContext(BasketContext);
 
@@ -61,7 +51,8 @@ export default function Cards(props) {
             onClick={() => {
               theme.direction === "rtl"
                 ? basket.saveBasket(props.object)
-                : (document.location.href = `/product/?id=${props.object.trackId}`);
+                : props.modal();
+              //(document.location.href = `/product/?id=${props.object.trackId}`);
               console.log("basket", basket);
             }}
           >
