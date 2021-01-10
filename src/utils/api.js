@@ -1,6 +1,6 @@
 import { getError } from "./functions";
 
-const URL = `https://itunes.apple.com/search?country=ru&`;
+const URL = `https://itunes.apple.com/`;
 
 const buildHeaders = (token, method, isFile = false) => {
   let headers = {
@@ -137,6 +137,12 @@ const apiRequestWithBody = async (method, url, data, token = null) => {
 // };
 // Search all
 export const getSearchAll = async data => {
-  console.log("api data", data);
-  return await apiRequestWithBody("POST", `${URL}term=${data ? data : "K/DA"}`);
+  return await apiRequestWithBody(
+    "GET",
+    `${URL}search?country=ru&term=${data}`
+  );
+};
+
+export const getSearchByID = async id => {
+  return await apiRequestWithBody("GET", `${URL}lookup?country=ru&id=${id}`);
 };

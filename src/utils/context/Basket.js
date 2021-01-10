@@ -9,6 +9,10 @@ const defaultBasket = {
 export const BasketProvider = ({ children, basket }) => {
   const [currentBasket, setCurrentBasket] = useState(basket || defaultBasket);
 
+  useEffect(() => {
+    console.log("currentBasket", currentBasket);
+  }, [currentBasket.length]);
+
   const saveBasket = values => {
     const data = basket;
     data.push(values);

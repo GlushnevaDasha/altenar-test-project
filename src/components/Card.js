@@ -71,7 +71,7 @@ export default function Cards(props) {
             onClick={() => {
               theme.direction === "rtl"
                 ? basket.saveBasket(props.object)
-                : (document.location.href = "/product");
+                : (document.location.href = `/product/?id=${props.object.trackId}`);
               console.log("basket", basket);
             }}
           >
@@ -81,14 +81,14 @@ export default function Cards(props) {
               <InfoSharpIcon />
             )}
           </IconButton>
-          <IconButton aria-label='play/pause'>
+          {/* <IconButton aria-label='play/pause'>
             <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
+          </IconButton> */}
           <IconButton
             aria-label='next'
             onClick={() => {
               theme.direction === "rtl"
-                ? (document.location.href = "/product")
+                ? (document.location.href = `/product/?id=${props.object.trackId}`)
                 : basket.saveBasket(props.object);
               console.log("basket", basket);
             }}
