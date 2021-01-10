@@ -75,67 +75,6 @@ const apiRequestWithBody = async (method, url, data, token = null) => {
   // });
 };
 
-// const apiRequest = async (method, url, token = null) => {
-//   return await fetch(url, {
-//     method,
-//     headers: buildHeaders(token, method)
-//   })
-//     .then(function(response) {
-//       if (response.status !== 200) {
-//         return {
-//           error: response.status,
-//           message: `Ошибка ${response.status} - ${response.statusText}`
-//         };
-//       } else {
-//         return Promise.resolve(response);
-//       }
-//     })
-//     .then(res => res.json())
-//     .then(function(data) {
-//       return data;
-//     })
-//     .catch(function(error) {
-//       return { error: true, message: error };
-//     });
-// };
-
-// const apiRequestNoAnswer = async (method, url, token = null) => {
-//   await fetch(url, {
-//     method,
-//     headers: buildHeaders(token, method)
-//   }).then(function(response) {
-//     if (response.status !== 200) {
-//       return {
-//         error: response.status,
-//         message: `Ошибка ${response.status} - ${response.statusText}`
-//       };
-//     } else {
-//       return {
-//         message: `Ok`
-//       };
-//     }
-//   });
-// };
-
-// const apiRequestNoAnswerWithBody = async (method, url, data, token = null) => {
-//   await fetch(url, {
-//     method,
-//     headers: buildHeaders(token, method),
-//     body: JSON.stringify(data)
-//   })
-//     .then(function(response) {
-//       if (response.status !== 200) {
-//         return {
-//           error: response.status,
-//           message: `Ошибка ${response.status} - ${response.statusText}`
-//         };
-//       } else {
-//         return { error: false };
-//       }
-//     })
-//     .then(res => res);
-// };
-// Search all
 export const getSearchAll = async data => {
   return await apiRequestWithBody(
     "GET",

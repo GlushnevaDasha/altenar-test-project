@@ -36,6 +36,7 @@ export default function Product() {
   }, [product.length]);
 
   const [isFeath, setFeath] = useState(true);
+  const [isPlay, setisPlay] = useState(false);
 
   async function getData() {
     setFeath(false);
@@ -61,11 +62,16 @@ export default function Product() {
                 "100x100bb",
                 "500x500bb"
               )})`,
-              width: 500,
+              width: "50%",
               height: 500
             }}
-          ></div>
-          <div>
+          />
+          <div
+            style={{
+              width: "50%",
+              height: 500
+            }}
+          >
             <Typography component='h6' variant='h6' className='text'>
               {product[0].trackName}
             </Typography>
@@ -94,14 +100,28 @@ export default function Product() {
                 </IconButton>
               ) : null}
 
-              <IconButton
-                aria-label='play/pause'
-                onClick={() => {
-                  document.location.href = product[0].previewUrl;
-                }}
-              >
-                <PlayArrowIcon className={classes.playIcon} />
-              </IconButton>
+              {/* {isPlay ? ( */}
+              <video controls autoplay name='media'>
+                <source
+                  src={`${product[0].previewUrl}`}
+                  type={
+                    product[0].kind === "feature-movie"
+                      ? "video/x-m4v"
+                      : "audio/x-m4a"
+                  }
+                />
+              </video>
+              {/* // ) : ( */}
+              {/* //   <IconButton */}
+              {/* //     aria-label='play/pause' */}
+              {/* //     onClick={() => { */}
+              {/* //       // document.location.href = product[0].previewUrl; */}
+              {/* //       setisPlay(!isPlay); */}
+              {/* //     }} */}
+              {/* //   > */}
+              {/* //     <PlayArrowIcon className={classes.playIcon} /> */}
+              {/* //   </IconButton> */}
+              {/* // )} */}
 
               {theme.direction === "rtl" ? null : (
                 <IconButton
@@ -114,10 +134,10 @@ export default function Product() {
                 </IconButton>
               )}
             </div>
-            <div>{product[0].longDescription}</div>
           </div>
         </div>
       ) : null}
+      <div>{product[0].longDescription}</div>
     </div>
   );
 }
