@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import BasketContext from "../utils/context/Basket";
 import {
   Theme,
   createStyles,
@@ -17,6 +18,10 @@ import {
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
+import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
+import DoneSharpIcon from "@material-ui/icons/DoneSharp";
+import InfoSharpIcon from "@material-ui/icons/InfoSharp";
+
 import "../utils/styles/components/card.css";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Cards(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const basket = useContext(BasketContext);
 
   return (
     <Card className='cardContainer'>
@@ -60,21 +66,37 @@ export default function Cards(props) {
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label='previous'>
+          <IconButton
+            aria-label='previous'
+            onClick={() => {
+              theme.direction === "rtl"
+                ? basket.saveBasket(props.object)
+                : (document.location.href = "/product");
+              console.log("basket", basket);
+            }}
+          >
             {theme.direction === "rtl" ? (
-              <SkipNextIcon />
+              <AddShoppingCartSharpIcon />
             ) : (
-              <SkipPreviousIcon />
+              <InfoSharpIcon />
             )}
           </IconButton>
           <IconButton aria-label='play/pause'>
             <PlayArrowIcon className={classes.playIcon} />
           </IconButton>
-          <IconButton aria-label='next'>
+          <IconButton
+            aria-label='next'
+            onClick={() => {
+              theme.direction === "rtl"
+                ? (document.location.href = "/product")
+                : basket.saveBasket(props.object);
+              console.log("basket", basket);
+            }}
+          >
             {theme.direction === "rtl" ? (
-              <SkipPreviousIcon />
+              <InfoSharpIcon />
             ) : (
-              <SkipNextIcon />
+              <AddShoppingCartSharpIcon />
             )}
           </IconButton>
         </div>

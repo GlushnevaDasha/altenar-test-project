@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const BasketContext = React.createContext();
 
@@ -10,7 +10,9 @@ export const BasketProvider = ({ children, basket }) => {
   const [currentBasket, setCurrentBasket] = useState(basket || defaultBasket);
 
   const saveBasket = values => {
-    setCurrentBasket(values);
+    const data = basket;
+    data.push(values);
+    setCurrentBasket(data);
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import ThemeContext from "../../utils/context/Theme";
+import BasketContext from "../../utils/context/Basket";
 
 import {
   makeStyles,
@@ -65,15 +66,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Home() {
   const theme = useContext(ThemeContext);
-
+  const basket = useContext(BasketContext);
   const [mas, setMas] = useState([]);
   const [search, setSearch] = useState("");
+  const [basketMas, setBasketMas] = useState(basket.basket.length);
+
+  useEffect(() => {
+    const length = basket.basket.length;
+    basketMas !== length
+      ? setBasketMas(length)
+      : console.log("basket.basket.length useEffect", basket.basket.length);
+  });
 
   const [isFeath, setFeath] = useState(true);
 
   async function getData() {
     setFeath(false);
-    console.log("search", search);
     let data = await getSearchAll(search);
     if (data.error) {
       setMas(mas);
@@ -89,6 +97,7 @@ export default function Home() {
 
   return (
     <div className={theme.theme ? "white" : "dark"}>
+      {console.log("basket.basket.length", basket.basket.length)}
       <div className='search'>
         <IconButton className={classes.iconButton} aria-label='menu'>
           <MenuIcon />
@@ -109,6 +118,7 @@ export default function Home() {
           color='primary'
           onClick={() => getData()}
           startIcon={<SearchIcon />}
+          style={{ marginLeft: 10 }}
         >
           Поиск
         </Button>
@@ -118,7 +128,7 @@ export default function Home() {
             document.location.href = "/shop";
           }}
         >
-          <StyledBadge badgeContent={4} color='secondary'>
+          <StyledBadge badgeContent={basketMas} color='secondary'>
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>
