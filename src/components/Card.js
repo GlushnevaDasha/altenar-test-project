@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { BasketContext } from "../utils/context";
+import { BasketContext, ThemeContext } from "../utils/context";
 
 import {
   Card,
@@ -17,6 +17,7 @@ import "../utils/styles/components/card.css";
 
 export default function Cards(props) {
   const basket = useContext(BasketContext);
+  const theme = useContext(ThemeContext);
 
   return (
     <Card className='cardContainer'>
@@ -26,17 +27,25 @@ export default function Cards(props) {
       />
       <div className='details'>
         <CardContent className='content'>
-          <Typography component='h6' variant='h6' className='text'>
+          <Typography
+            component='h6'
+            variant='h6'
+            className={theme.theme ? "text" : "dark-text text"}
+          >
             {props.object.trackName || props.object.collectionName}
           </Typography>
           <Typography
             variant='subtitle1'
             color='textSecondary'
-            className='text'
+            className={theme.theme ? "text" : "dark-text text"}
           >
             {props.object.artistName}
           </Typography>
-          <Typography variant='subtitle1' color='textSecondary'>
+          <Typography
+            variant='subtitle1'
+            color='textSecondary'
+            className={theme.theme ? "" : "dark-text"}
+          >
             {props.object.trackPrice > 0
               ? props.object.trackPrice
               : props.object.collectionPrice || props.object.collectionPrice}
@@ -45,12 +54,16 @@ export default function Cards(props) {
         </CardContent>
         <div className='controls'>
           <Link to={`/product/?id=${props.object.trackId}`}>
-            <IconButton aria-label='previous'>
+            <IconButton
+              aria-label='previous'
+              className={theme.theme ? "" : "dark-text"}
+            >
               <InfoSharpIcon />
             </IconButton>
           </Link>
           <IconButton
             aria-label='next'
+            className={theme.theme ? "" : "dark-text"}
             onClick={() => {
               basket.saveBasket(props.object);
             }}

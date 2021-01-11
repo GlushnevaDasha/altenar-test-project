@@ -40,13 +40,7 @@ export default function Home() {
   const [mas, setMas] = useState([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    // setMas(cookie.load("search").results);
-    // const length = basket.basket.length;
-    // basketMas !== length
-    //   ? setBasketMas(length)
-    //   : console.log("basket.basket.length useEffect", basket.basket.length);
-  });
+  // useEffect(() => {});
 
   const [isFeath, setFeath] = useState(true);
 
@@ -64,8 +58,6 @@ export default function Home() {
 
   return (
     <div className={theme.theme ? "white" : "dark"}>
-      {console.log("basket.basket.length", basket)}
-      {console.log("theme", theme)}
       <div className='search'>
         <TextField
           id='outlined-search'
@@ -85,11 +77,15 @@ export default function Home() {
           startIcon={<SearchIcon />}
           style={{ marginLeft: 10 }}
         >
-          Поиск
+          {/* Поиск */}
+          <div className='buttom-text'>Поиск</div>
         </Button>
 
         <Link to='/shop'>
-          <IconButton aria-label='cart'>
+          <IconButton
+            aria-label='cart'
+            className={theme.theme ? "" : "dark-text"}
+          >
             <StyledBadge badgeContent={basket.basket.length} color='secondary'>
               <ShoppingCartIcon />
             </StyledBadge>
@@ -98,6 +94,7 @@ export default function Home() {
 
         <IconButton
           aria-label='menu'
+          className={theme.theme ? "" : "dark-text"}
           onClick={() => {
             theme.saveTheme(!theme.theme);
           }}

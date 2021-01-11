@@ -1,0 +1,19 @@
+@media (max-width: 576px) {
+  .full {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 576px) {
+  /* .full {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  } */
+}

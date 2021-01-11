@@ -18,15 +18,37 @@ input {
   flex: 1;
 }
 
+.buttom-text {
+  display: block;
+}
+
 @media (max-width: 576px) {
   .search {
     padding: 10px 10px;
+  }
+  .buttom-text {
+    display: none;
+  }
+
+  .MuiButton-startIcon {
+    margin: 0 !important;
+  }
+
+  .MuiButton-outlined {
+    padding: 5px 5px !important;
   }
 }
 
 @media (min-width: 576px) {
   .search {
     padding: 10px 10px;
+  }
+  .buttom-text {
+    display: none;
+  }
+
+  .MuiButton-outlined {
+    padding: 5px 5px !important;
   }
 }
 

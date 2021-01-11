@@ -39,9 +39,34 @@
   padding: 0px 0px 8px 8px;
 }
 
+.full {
+  display: flex;
+}
+
+.mobile {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .cover {
     width: 150px;
+    /* height: 150px; */
+  }
+  .full {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+  }
+
+  .basketCardContainer {
+    width: 280px;
+    margin: 10px;
+  }
+
+  .MuiIconButton-root {
+    padding: 0px;
   }
 }
 
@@ -50,47 +75,24 @@
     width: 300px;
   }
 
+  .full {
+    display: none !important;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .basketCardContainer {
+    width: 280px;
+    margin: 10px;
+  }
+
   .details {
     width: 150px;
   }
 
   .cover {
     width: 150px;
-  }
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
-  }
-}
-
-@media (min-width: 992px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
   }
 }

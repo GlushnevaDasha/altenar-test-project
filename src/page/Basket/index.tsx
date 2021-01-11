@@ -34,11 +34,16 @@ export default function BasketPage() {
           }}
         >
           <div />
-          <Typography component='h6' variant='h6' className='text'>
-            Ваша корзина
+          <Typography
+            component='h6'
+            variant='h6'
+            className={theme.theme ? "text" : "dark-text text"}
+          >
+            Kорзина
           </Typography>
           <IconButton
             aria-label='menu'
+            className={theme.theme ? "" : "dark-text"}
             onClick={() => {
               theme.saveTheme(!theme.theme);
             }}
@@ -57,7 +62,11 @@ export default function BasketPage() {
         </Grid>
         {basket.basket.length !== 0 ? (
           <div style={{ justifyContent: "flex-end", display: "flex" }}>
-            <Typography component='h6' variant='h6' className='text'>
+            <Typography
+              component='h6'
+              variant='h6'
+              className={theme.theme ? "text" : "dark-text text"}
+            >
               Итого: {schet} {" " + basket.basket[0].currency}
             </Typography>
           </div>

@@ -14,8 +14,8 @@ export default function App() {
   };
 
   const deleteBasket = values => {
-    console.log("deleteBasket");
-    setCurrentBasket([...currentBasket.splice(values, 1)]);
+    currentBasket.splice(values, 1);
+    setCurrentBasket([...currentBasket]);
   };
 
   const [currentTheme, setCurrentTheme] = useState(true);
