@@ -9,9 +9,9 @@ import {
   CircularProgress,
   TextField,
   Grid,
-  Badge
+  Badge,
+  Typography
 } from "@material-ui/core";
-
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingBasket";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
@@ -66,6 +66,7 @@ export default function Home() {
           variant='outlined'
           fullWidth
           value={search}
+          className={theme.theme ? "" : "dark-text"}
           onChange={event => {
             setSearch(event.target.value);
           }}
@@ -77,7 +78,6 @@ export default function Home() {
           startIcon={<SearchIcon />}
           style={{ marginLeft: 10 }}
         >
-          {/* Поиск */}
           <div className='buttom-text'>Поиск</div>
         </Button>
 
@@ -105,9 +105,17 @@ export default function Home() {
       <div className={mas.length === 0 || !isFeath ? "page" : ""}>
         {isFeath ? (
           <Grid container direction='row' justify='center' alignItems='center'>
-            {mas.length !== 0
-              ? mas.map((item, index) => <Card key={index} object={item} />)
-              : null}
+            {mas.length !== 0 ? (
+              mas.map((item, index) => <Card key={index} object={item} />)
+            ) : (
+              <Typography
+                component='h5'
+                variant='h5'
+                className={theme.theme ? "text" : "dark-text text"}
+              >
+                По данному запросу ничего не найдено
+              </Typography>
+            )}
           </Grid>
         ) : (
           <div className='loaderContainer'>
