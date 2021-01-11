@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import store from "store";
 import { Link } from "react-router-dom";
 import { BasketContext, ThemeContext } from "../../utils/context";
 
@@ -37,7 +38,7 @@ const StyledBadge = withStyles((theme: Theme) =>
 export default function Home() {
   const theme = useContext(ThemeContext);
   const basket = useContext(BasketContext);
-  const [mas, setMas] = useState([]);
+  const [mas, setMas] = useState(store.get("search") || []);
   const [search, setSearch] = useState("");
 
   // useEffect(() => {});
@@ -52,6 +53,8 @@ export default function Home() {
       setFeath(true);
     } else {
       setMas(data.results);
+      store.set("search", data.results);
+
       setFeath(true);
     }
   }
