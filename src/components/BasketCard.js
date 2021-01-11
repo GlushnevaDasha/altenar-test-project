@@ -23,8 +23,8 @@ export default function BasketCard(props) {
     <div>
       <Card className='basketCardContainer full'>
         <CardMedia
-          className='cover'
-          image={props.object.artworkUrl100.replace("100x100bb", "200x200bb")}
+          className='cover-basket'
+          image={props.object.artworkUrl100}
         />
         <CardContent
           className='content'
@@ -90,8 +90,7 @@ export default function BasketCard(props) {
 
       <Card className='basketCardContainer mobile'>
         <CardMedia
-          className='cover'
-          style={{ width: 100, height: 100 }}
+          className='cover-basket'
           image={props.object.artworkUrl100}
         />
 
@@ -99,9 +98,9 @@ export default function BasketCard(props) {
           className='content'
           style={{
             // display: "flex",
-            width: 180,
+            // width: "100%",
             alignItems: "center",
-            justifyContent: "space-between",
+            // sjustifyContent: "space-between",
             marginLeft: 10,
             marginTop: 10,
             padding: 0
@@ -157,8 +156,6 @@ export default function BasketCard(props) {
             </IconButton>
           </div>
           <div style={{ width: 150, textAlign: "center" }}></div>
-
-          <div></div>
         </CardContent>
       </Card>
     </div>

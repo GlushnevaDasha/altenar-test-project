@@ -25,16 +25,12 @@ export default function Product() {
       fac
         .getColorAsync(product[0].artworkUrl100)
         .then(colors => {
-          console.log("Average color", colors);
           setColor(colors);
         })
         .catch(e => {
           console.log(e);
         });
     }
-
-    // container.style.backgroundColor = color.rgba;
-    // container.style.color = color.isDark ? "#fff" : "#000";
   }, [product.length]);
 
   const [isFeath, setFeath] = useState(false);
@@ -56,7 +52,7 @@ export default function Product() {
     <div>
       <div className={theme.theme ? "white full-page" : "dark full-page"}>
         {isFeath ? (
-          <div>
+          <div class='page'>
             <div className='center'>
               <div
                 className={
@@ -73,11 +69,16 @@ export default function Product() {
               />
               <div>
                 <div className='name-container'>
-                  <Typography component='h6' variant='h6' className='text'>
+                  <Typography
+                    component='h6'
+                    variant='h6'
+                    className={theme.theme ? "text" : "dark-text text"}
+                  >
                     {product[0].trackName}
                   </Typography>
                   <IconButton
                     aria-label='menu'
+                    className={theme.theme ? "" : "dark-text"}
                     onClick={() => {
                       theme.saveTheme(!theme.theme);
                     }}
@@ -92,12 +93,16 @@ export default function Product() {
                 <Typography
                   variant='subtitle1'
                   color='textSecondary'
-                  className='text'
+                  className={theme.theme ? "text" : "dark-text text"}
                 >
                   {product[0].artistName}
                 </Typography>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <Typography variant='subtitle1' color='textSecondary'>
+                  <Typography
+                    variant='subtitle1'
+                    color='textSecondary'
+                    className={theme.theme ? "" : "dark-text"}
+                  >
                     {product[0].trackPrice > 0
                       ? product[0].trackPrice
                       : product[0].collectionPrice ||
@@ -106,6 +111,7 @@ export default function Product() {
                   </Typography>{" "}
                   <IconButton
                     aria-label='previous'
+                    className={theme.theme ? "" : "dark-text"}
                     onClick={() => {
                       basket.saveBasket(product[0]);
                     }}
@@ -127,7 +133,11 @@ export default function Product() {
               </div>
             </div>
             <div>
-              <Typography variant='subtitle1' color='textSecondary'>
+              <Typography
+                variant='subtitle1'
+                color='textSecondary'
+                className={theme.theme ? "" : "dark-text"}
+              >
                 {product[0].longDescription}
               </Typography>
             </div>
@@ -155,7 +165,6 @@ export default function Product() {
               >
                 <div
                   style={{
-                    // height: "100%",
                     display: "flex",
                     flexDirection: "column",
                     paddingTop:
@@ -168,7 +177,15 @@ export default function Product() {
                     background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.rgba} 50%, ${color.rgba} 100% )`
                   }}
                 >
-                  <video controls name='media' className='video-container'>
+                  <video
+                    controls
+                    name='media'
+                    className={
+                      product[0].kind === "feature-movie"
+                        ? "video-container"
+                        : "audio-container"
+                    }
+                  >
                     <source
                       src={`${product[0].previewUrl}`}
                       type={

@@ -7,7 +7,7 @@
 .basketCardContainer {
   width: 100%;
   display: flex;
-  margin: 10px;
+  margin: 0px 0px 10px 0px;
 }
 
 .MuiPaper-root {
@@ -31,6 +31,12 @@
 }
 .cover {
   width: 200px;
+  height: 200px;
+}
+
+.cover-basket {
+  width: 100px;
+  height: 100px;
 }
 
 .controls {
@@ -48,10 +54,6 @@
 }
 
 @media (max-width: 576px) {
-  .cover {
-    width: 150px;
-    /* height: 150px; */
-  }
   .full {
     display: none;
   }
@@ -62,37 +64,24 @@
 
   .basketCardContainer {
     width: 280px;
-    margin: 10px;
   }
 
   .MuiIconButton-root {
     padding: 0px;
   }
 }
-
+/* БОЛЬШАЯ */
 @media (min-width: 576px) {
-  .cardContainer {
-    width: 300px;
+  .basketCardContainer {
+    width: 100%;
+    display: flex;
   }
 
   .full {
-    display: none !important;
+    display: flex;
   }
 
   .mobile {
-    display: block;
-  }
-
-  .basketCardContainer {
-    width: 280px;
-    margin: 10px;
-  }
-
-  .details {
-    width: 150px;
-  }
-
-  .cover {
-    width: 150px;
+    display: none !important;
   }
 }

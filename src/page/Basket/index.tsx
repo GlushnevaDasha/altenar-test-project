@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { BasketContext, ThemeContext } from "../../utils/context";
-import { Grid } from "@material-ui/core";
 import BasketCard from "../../components/BasketCard";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
-
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { IconButton, Typography } from "@material-ui/core";
+
+import "../../utils/styles/page/basket.css";
 export default function BasketPage() {
   const basket = useContext(BasketContext);
   const theme = useContext(ThemeContext);
@@ -25,18 +27,19 @@ export default function BasketPage() {
 
   return (
     <div className={theme.theme ? "light" : "dark"}>
-      <div className={basket.basket.length !== 0 ? " page" : ""}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}
-        >
-          <div />
+      <div className='page'>
+        <div className='header'>
+          <Link to='/'>
+            <IconButton
+              aria-label='menu'
+              className={theme.theme ? "" : "dark-text"}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          </Link>
           <Typography
-            component='h6'
-            variant='h6'
+            component='h5'
+            variant='h5'
             className={theme.theme ? "text" : "dark-text text"}
           >
             Kорзина
@@ -51,17 +54,23 @@ export default function BasketPage() {
             {theme.theme ? <BrightnessLowIcon /> : <BrightnessHighIcon />}
           </IconButton>
         </div>
-        <Grid container direction='row' justify='center' alignItems='center'>
+        <div>
           {basket.basket.length !== 0 ? (
             basket.basket.map((item, index) => (
               <BasketCard key={index} object={item} index={index} />
             ))
           ) : (
-            <div>У Вас еще нет покупок</div>
+            <Typography
+              component='h5'
+              variant='h5'
+              className={theme.theme ? "text" : "dark-text text"}
+            >
+              Добавьте понравившийся Вам товар
+            </Typography>
           )}
-        </Grid>
+        </div>
         {basket.basket.length !== 0 ? (
-          <div style={{ justifyContent: "flex-end", display: "flex" }}>
+          <div className='schet'>
             <Typography
               component='h6'
               variant='h6'

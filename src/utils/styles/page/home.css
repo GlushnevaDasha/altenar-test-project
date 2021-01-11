@@ -38,18 +38,18 @@ input {
     padding: 5px 5px !important;
   }
 }
-
+/* БОЛЬШАЯ */
 @media (min-width: 576px) {
   .search {
     padding: 10px 10px;
   }
-  .buttom-text {
+  /* .buttom-text {
     display: none;
-  }
+  } */
 
-  .MuiButton-outlined {
+  /* .MuiButton-outlined {
     padding: 5px 5px !important;
-  }
+  } */
 }
 
 @media (min-width: 768px) {

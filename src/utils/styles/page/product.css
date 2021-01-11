@@ -9,7 +9,7 @@
 
 .center {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .poster-video {
@@ -31,7 +31,11 @@
 }
 
 .video-container {
-  width: 500px;
+  width: 600px;
+}
+
+.audio-container {
+  width: 300px;
 }
 
 .ls0 {
@@ -41,7 +45,11 @@
 .mobile-page {
   display: none;
 }
+
 @media (max-width: 576px) {
+  .name-container {
+    margin-top: 20px;
+  }
   .search {
     padding: 10px 10px;
   }
@@ -49,6 +57,11 @@
   .poster-video {
     width: 320px;
     height: 450px;
+    background-size: contain;
+  }
+
+  .poster-sound {
+    width: 320px;
     background-size: contain;
   }
 
@@ -70,57 +83,6 @@
   }
 }
 
+/* БОЛЬШАЯ */
 @media (min-width: 576px) {
-  .video-container {
-    width: 300px;
-  }
-
-  .poster-sound {
-    width: 100%;
-    /* height: 100vw; */
-  }
-
-  /* .full-page {
-    display: none;
-  }
-
-  .mobile-page {
-    display: block;
-  } */
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
-  }
-}
-
-@media (min-width: 992px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .title {
-    font-size: 36px;
-    line-height: 120%;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 120%;
-  }
 }
