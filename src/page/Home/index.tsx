@@ -9,8 +9,7 @@ import {
   CircularProgress,
   TextField,
   Grid,
-  Badge,
-  Modal
+  Badge
 } from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
@@ -106,7 +105,7 @@ export default function Home() {
           {theme.theme ? <BrightnessLowIcon /> : <BrightnessHighIcon />}
         </IconButton>
       </div>
-      <div className={mas.length === 0 || !isFeath ? "page" : null}>
+      <div className={mas.length === 0 || !isFeath ? "page" : ""}>
         {isFeath ? (
           <Grid container direction='row' justify='center' alignItems='center'>
             {mas.length !== 0

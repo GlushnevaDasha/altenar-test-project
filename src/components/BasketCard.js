@@ -10,22 +10,30 @@ import {
   Typography
 } from "@material-ui/core";
 
-import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
+import ClearIcon from "@material-ui/icons/Clear";
 import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
 import "../utils/styles/components/card.css";
 
-export default function Cards(props) {
+export default function BasketCard(props) {
   const basket = useContext(BasketContext);
 
   return (
-    <Card className='cardContainer'>
+    <Card className='basketCardContainer'>
       <CardMedia
         className='cover'
         image={props.object.artworkUrl100.replace("100x100bb", "200x200bb")}
       />
-      <div className='details'>
-        <CardContent className='content'>
+
+      <CardContent
+        className='content'
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <div style={{ width: "100%" }}>
           <Typography component='h6' variant='h6' className='text'>
             {props.object.trackName || props.object.collectionName}
           </Typography>
@@ -36,29 +44,35 @@ export default function Cards(props) {
           >
             {props.object.artistName}
           </Typography>
+        </div>
+        <div>
+          <Link to={`/product/?id=${props.object.trackId}`}>
+            <IconButton aria-label='previous'>
+              <InfoSharpIcon />
+            </IconButton>
+          </Link>
+        </div>
+        <div style={{ width: 150, textAlign: "center" }}>
           <Typography variant='subtitle1' color='textSecondary'>
             {props.object.trackPrice > 0
               ? props.object.trackPrice
               : props.object.collectionPrice || props.object.collectionPrice}
             {" " + props.object.currency}
           </Typography>
-        </CardContent>
-        <div className='controls'>
-          <Link to={`/product/?id=${props.object.trackId}`}>
-            <IconButton aria-label='previous'>
-              <InfoSharpIcon />
-            </IconButton>
-          </Link>
+        </div>
+
+        <div>
           <IconButton
             aria-label='next'
             onClick={() => {
-              basket.saveBasket(props.object);
+              basket.deleteBasket(props.index);
+              // basket.saveBasket(props.object);
             }}
           >
-            <AddShoppingCartSharpIcon />
+            <ClearIcon />
           </IconButton>
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 }

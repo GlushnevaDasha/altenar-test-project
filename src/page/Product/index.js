@@ -2,32 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext, BasketContext } from "../../utils/context";
 import { getParameterFromUrl } from "../../utils/functions";
 import { getSearchByID } from "../../utils/api";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 import { IconButton, Typography } from "@material-ui/core";
 
 import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
-import { height } from "@material-ui/system";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    controls: {
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1)
-    },
-    playIcon: {
-      height: 38,
-      width: 38
-    }
-  })
-);
 
 export default function Product() {
-  const classes = useStyles();
   const theme = useContext(ThemeContext);
   const basket = useContext(BasketContext);
   const [product, setProduct] = useState([]);
@@ -64,7 +46,7 @@ export default function Product() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around"
+              justifyContent: "space-between"
               // height: "100vh",
               // padding: "5vh 5vw "
             }}
@@ -84,7 +66,7 @@ export default function Product() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-evenly"
+                  justifyContent: "space-between"
                 }}
               >
                 <Typography component='h6' variant='h6' className='text'>

@@ -13,6 +13,11 @@ export default function App() {
     setCurrentBasket([...currentBasket, values]);
   };
 
+  const deleteBasket = values => {
+    console.log("deleteBasket");
+    setCurrentBasket([...currentBasket.splice(values, 1)]);
+  };
+
   const [currentTheme, setCurrentTheme] = useState(true);
 
   const saveTheme = values => {
@@ -21,7 +26,9 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, saveTheme }}>
-      <BasketContext.Provider value={{ basket: currentBasket, saveBasket }}>
+      <BasketContext.Provider
+        value={{ basket: currentBasket, saveBasket, deleteBasket }}
+      >
         <Router>
           <Switch>
             <Route exact path='/' component={Home} />

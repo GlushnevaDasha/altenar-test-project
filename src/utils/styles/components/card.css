@@ -4,6 +4,12 @@
   margin: 10px;
 }
 
+.basketCardContainer {
+  width: 100%;
+  display: flex;
+  margin: 10px;
+}
+
 .MuiPaper-root {
   background-color: rgba(0, 0, 0, 0) !important;
 }
