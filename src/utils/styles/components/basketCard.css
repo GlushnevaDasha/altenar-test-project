@@ -1,0 +1,106 @@
+.basketCardContainer {
+  width: 100%;
+  display: flex;
+  margin: 0px 10px 10px 10px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.priceContent {
+  width: 150px;
+  text-align: center;
+}
+
+.MuiPaper-root {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.web-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-content {
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 0px !important;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cover-basket {
+  width: 100px;
+  height: 100px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  padding: 0px 0px 8px 8px;
+}
+
+.full {
+  display: flex;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .full {
+    display: none;
+  }
+
+  .mobile {
+    display: flex !important;
+  }
+
+  .basketCardContainer {
+    width: 300px;
+  }
+
+  .MuiIconButton-root {
+    padding: 0px !important;
+  }
+  .price-text {
+    margin: 0px 5px !important;
+  }
+}
+/* БОЛЬШАЯ */
+@media (min-width: 576px) {
+  .basketCardContainer {
+    width: 100%;
+    display: flex;
+  }
+
+  .full {
+    display: flex;
+  }
+
+  .mobile {
+    display: none !important;
+  }
+}

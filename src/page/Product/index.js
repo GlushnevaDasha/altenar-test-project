@@ -173,7 +173,6 @@ export default function Product() {
                       product[0].kind === "feature-movie" ? "0vw" : "35vw",
                     paddingLeft: 10,
                     paddingRight: 10,
-
                     background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.rgba} 50%, ${color.rgba} 100% )`
                   }}
                 >

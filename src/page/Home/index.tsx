@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import store from "store";
 import { Link } from "react-router-dom";
 import { BasketContext, ThemeContext } from "../../utils/context";
@@ -40,8 +40,6 @@ export default function Home() {
   const basket = useContext(BasketContext);
   const [mas, setMas] = useState(store.get("search") || []);
   const [search, setSearch] = useState("");
-
-  // useEffect(() => {});
 
   const [isFeath, setFeath] = useState(true);
 

@@ -13,7 +13,7 @@ import {
 import ClearIcon from "@material-ui/icons/Clear";
 import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
-import "../utils/styles/components/card.css";
+import "../utils/styles/components/basketCard.css";
 
 export default function BasketCard(props) {
   const basket = useContext(BasketContext);
@@ -26,15 +26,8 @@ export default function BasketCard(props) {
           className='cover-basket'
           image={props.object.artworkUrl100}
         />
-        <CardContent
-          className='content'
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}
-        >
-          <div style={{ width: "100%" }}>
+        <CardContent className='content web-content'>
+          <div className='width-100'>
             <Typography
               component='h6'
               variant='h6'
@@ -60,7 +53,7 @@ export default function BasketCard(props) {
               </IconButton>
             </Link>
           </div>
-          <div style={{ width: 150, textAlign: "center" }}>
+          <div className='priceContent'>
             <Typography
               variant='subtitle1'
               color='textSecondary'
@@ -79,7 +72,6 @@ export default function BasketCard(props) {
               className={theme.theme ? "" : "dark-text"}
               onClick={() => {
                 basket.deleteBasket(props.index);
-                // basket.saveBasket(props.object);
               }}
             >
               <ClearIcon />
@@ -94,19 +86,8 @@ export default function BasketCard(props) {
           image={props.object.artworkUrl100}
         />
 
-        <CardContent
-          className='content'
-          style={{
-            // display: "flex",
-            // width: "100%",
-            alignItems: "center",
-            // sjustifyContent: "space-between",
-            marginLeft: 10,
-            marginTop: 10,
-            padding: 0
-          }}
-        >
-          <div style={{ flexDirection: "column" }}>
+        <CardContent className='content mobile-content'>
+          <div className='column'>
             <Typography
               component='h7'
               variant='h7'
@@ -137,7 +118,7 @@ export default function BasketCard(props) {
             <Typography
               variant='subtitle1'
               color='textSecondary'
-              className={theme.theme ? "" : "dark-text"}
+              className={theme.theme ? "price-text" : "dark-text price-text"}
             >
               {props.object.trackPrice > 0
                 ? props.object.trackPrice
@@ -149,13 +130,11 @@ export default function BasketCard(props) {
               className={theme.theme ? "" : "dark-text"}
               onClick={() => {
                 basket.deleteBasket(props.index);
-                // basket.saveBasket(props.object);
               }}
             >
               <ClearIcon />
             </IconButton>
           </div>
-          <div style={{ width: 150, textAlign: "center" }}></div>
         </CardContent>
       </Card>
     </div>
