@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./page/Home";
+// import Home from "./page/Home";
+import Test from "./page/Test";
 import Basket from "./page/Basket";
 import Product from "./page/Product";
 
@@ -31,7 +32,8 @@ export default function App() {
       >
         <Router>
           <Switch>
-            <Route exact path='/' component={Home} />
+            {/* <Route exact path='/' component={Home} /> */}
+            <Route exact path='/' component={Test} />
             <Route path='/shop' component={Basket} />
             <Route path='/product' component={Product} />
           </Switch>
