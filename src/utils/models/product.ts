@@ -6,4 +6,5 @@ export type ProductItem = {
   price: number;
   currency: string;
   previewUrl: string;
+  type: string;
 };
