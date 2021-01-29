@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import FastAverageColor from "fast-average-color";
 import { ThemeContext, BasketContext } from "../../utils/context";
 import { getParameterFromUrl } from "../../utils/functions";
 import { getSearchByID } from "../../utils/api";
@@ -7,9 +6,8 @@ import { getColorInfo } from "../../utils/functions";
 
 import { IconButton, Typography } from "@material-ui/core";
 
-import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import { AddShoppingCartSharp } from "../../asets/icons";
+import { ThemeButton, AddShoppingCart } from "../../components/IconButtons";
 
 import "../../utils/styles/page/product.css";
 
@@ -23,10 +21,7 @@ export default function Product() {
     getColorsInfo();
   }, [product.length]);
 
-  async function getColorsInfo() {
-    const colorInfo = await getColorInfo(product[0].artworkUrl100);
-    setColor(colorInfo);
-  }
+  async function getColorsInfo() {}
 
   const [isFeath, setFeath] = useState(false);
 
@@ -39,6 +34,8 @@ export default function Product() {
       setFeath(true);
     } else {
       setProduct(data.results);
+      const colorInfo = await getColorInfo(data.results[0].artworkUrl100);
+      setColor(colorInfo);
       setFeath(true);
     }
   }
@@ -71,19 +68,7 @@ export default function Product() {
                   >
                     {product[0].trackName}
                   </Typography>
-                  <IconButton
-                    aria-label='menu'
-                    className={theme.theme ? "" : "dark-text"}
-                    onClick={() => {
-                      theme.saveTheme(!theme.theme);
-                    }}
-                  >
-                    {theme.theme ? (
-                      <BrightnessLowIcon />
-                    ) : (
-                      <BrightnessHighIcon />
-                    )}
-                  </IconButton>
+                  <ThemeButton />
                 </div>
                 <Typography
                   variant='subtitle1'
@@ -104,15 +89,7 @@ export default function Product() {
                         product[0].collectionPrice}
                     {" " + product[0].currency}
                   </Typography>
-                  <IconButton
-                    aria-label='previous'
-                    className={theme.theme ? "" : "dark-text"}
-                    onClick={() => {
-                      basket.saveBasket(product[0]);
-                    }}
-                  >
-                    <AddShoppingCartSharpIcon />
-                  </IconButton>
+                  <AddShoppingCart product={product[0]} />
                 </div>
                 <video controls name='media' className='video-container'>
                   <source
@@ -230,7 +207,7 @@ export default function Product() {
                         basket.saveBasket(product[0]);
                       }}
                     >
-                      <AddShoppingCartSharpIcon />
+                      <AddShoppingCartSharp />
                     </IconButton>
                   </div>
 

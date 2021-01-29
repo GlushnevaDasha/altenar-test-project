@@ -10,8 +10,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
-import InfoSharpIcon from "@material-ui/icons/InfoSharp";
+import { AddShoppingCartSharp, InfoSharp } from "../../asets/icons";
 
 import "../../utils/styles/components/card.css";
 
@@ -58,7 +57,7 @@ export default function HomeCard(props) {
               aria-label='previous'
               className={theme.theme ? "" : "dark-text"}
             >
-              <InfoSharpIcon />
+              <InfoSharp />
             </IconButton>
           </Link>
           <IconButton
@@ -68,7 +67,7 @@ export default function HomeCard(props) {
               basket.saveBasket(props.object);
             }}
           >
-            <AddShoppingCartSharpIcon />
+            <AddShoppingCartSharp />
           </IconButton>
         </div>
       </div>
