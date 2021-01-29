@@ -101,12 +101,9 @@ interface PaginationProps {
   dataLength: number;
   page: number;
   setPage: (newPage: number) => void;
+  setCount: (newPage: number) => void;
   rowsPerPage: number;
   setRowsPerPage: (rows: number) => void;
-  onChangePage: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
-  ) => void;
 }
 
 const Pagination = (props: PaginationProps) => {
@@ -116,7 +113,7 @@ const Pagination = (props: PaginationProps) => {
     setPage,
     rowsPerPage,
     setRowsPerPage,
-    onChangePage
+    setCount
   } = props;
   const classes = useStyles();
   const [pageStr, setPageStr] = useState("");
@@ -140,10 +137,19 @@ const Pagination = (props: PaginationProps) => {
         ? page
         : Math.floor(dataLength / rowsPerPage);
     setPage(consPage);
+    setCount(consPage);
   };
 
   const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPageStr(event.target.value);
+  };
+
+  const handleChangePage = (
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+    setCount(newPage);
   };
 
   return (
@@ -164,7 +170,7 @@ const Pagination = (props: PaginationProps) => {
         count={dataLength}
         rowsPerPage={rowsPerPage}
         page={page}
-        onChangePage={(event, newPage) => onChangePage(event, newPage)}
+        onChangePage={(event, newPage) => handleChangePage(event, newPage)}
         onChangeRowsPerPage={handleChangeRowsPerPage}
         ActionsComponent={PaginationActions}
       />

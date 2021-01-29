@@ -1,88 +1,103 @@
 import React, { useState, useEffect } from "react";
 import {
-  Box,
-  FormControl,
-  Select,
+  Menu,
   MenuItem,
-  ListItemText
+  Input,
+  FormControl,
+  InputAdornment,
+  IconButton
 } from "@material-ui/core";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Pagination from "./Pagination";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      maxWidth: 204,
-      width: 204,
-      "& .MuiInputBase-input": {
-        paddingTop: 6
-      }
-    }
+    sizeSmall: { padding: 0 },
+    list: { padding: 0 }
   })
 );
 
 const Dropdown = () => {
+  const classes = useStyles();
   const [page, setPage] = useState(0);
+  const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string[]>([]);
   const [rowsPerPage, setRowsPerPage] = useState(20);
-  const [maxCount, setMaxCount] = useState(rowsPerPage * (page + 1));
-  const [minCount, setMinCount] = useState(rowsPerPage * page);
-  const classes = useStyles();
-  const dataLength: number = rows.length;
-  const setCount = (newPage: number) => {
-    setMaxCount(rowsPerPage * (newPage + 1));
-    setMinCount(rowsPerPage * newPage);
-  };
+  const [count, setCount] = useState({
+    max: rowsPerPage * (page + 1),
+    min: rowsPerPage * page
+  });
+  const values = rows;
+  const dataLength: number = values.length;
 
-  useEffect(() => {
-    setCount(page);
-    setValue(value);
-  }, [page, value]);
-
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    event.preventDefault();
-    const newValue = event.target.value as string[];
-    setValue(newValue);
-  };
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
-    setPage(newPage);
-    setCount(newPage);
   };
 
+  function editCount(newPage: number) {
+    setCount({ max: rowsPerPage * (newPage + 1), min: rowsPerPage * newPage });
+  }
+
   return (
-    <Box className={classes.root}>
-      <FormControl size='small' fullWidth>
-        <Select
-          id='competitors-dropdown'
-          multiple
+    <div>
+      <FormControl style={{ width: 250 }}>
+        <Input
+          id='standard-adornment-password'
           value={value}
-          onChange={handleChange}
-          // onClose={handleClose}
-          renderValue={selected => (selected as string[]).join(", ")}
+          onChange={event => {
+            setValueStr(event.target.value);
+          }}
+          endAdornment={
+            <InputAdornment position='end'>
+              <IconButton
+                className={classes.sizeSmall}
+                size='small'
+                onClick={() => {
+                  setOpen(!open);
+                }}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+        <Menu
+          open={open}
+          className={classes.list}
+          onClose={() => {
+            setOpen(false);
+          }}
         >
           <Pagination
             dataLength={dataLength}
             page={page}
             setPage={setPage}
+            setCount={editCount}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            onChangePage={handleChangePage}
           />
           {rows.map((row, index) => {
-            return index < maxCount && index >= minCount ? (
-              <MenuItem button value={row.name} key={index}>
-                <ListItemText primary={row.name} />
+            return index < count.max && index >= count.min ? (
+              <MenuItem
+                button
+                value={row.name}
+                key={row.id}
+                onClick={() => {
+                  setValue(row.name);
+                }}
+              >
+                {row.name}
               </MenuItem>
             ) : null;
           })}
-        </Select>
+        </Menu>
       </FormControl>
-    </Box>
+    </div>
   );
 };
 
