@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { BasketContext, ThemeContext } from "../utils/context";
+import { BasketContext, ThemeContext } from "../../utils/context";
 
 import {
   Card,
@@ -15,7 +15,7 @@ import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
 import "../utils/styles/components/card.css";
 
-export default function Cards(props) {
+export default function HomeCard(props) {
   const basket = useContext(BasketContext);
   const theme = useContext(ThemeContext);
 

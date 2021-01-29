@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { BasketContext, ThemeContext } from "../utils/context";
+import { BasketContext, ThemeContext } from "../../utils/context";
 
 import {
   Card,

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BasketContext, ThemeContext } from "../../utils/context";
-import BasketCard from "../../components/BasketCard";
+import BasketCard from "../../components/Cards/BasketCard";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
