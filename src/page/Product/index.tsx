@@ -14,8 +14,8 @@ import "../../utils/styles/page/product.css";
 export default function Product() {
   const theme = useContext(ThemeContext);
   const basket = useContext(BasketContext);
-  const [product, setProduct] = useState([]);
-  const [color, setColor] = useState({});
+  const [product, setProduct] = useState<any>([]);
+  const [color, setColor] = useState<any>({});
   useEffect(() => {
     getData();
     getColorsInfo();
@@ -27,31 +27,31 @@ export default function Product() {
 
   async function getData() {
     setFeath(false);
-    const id = getParameterFromUrl("id").toString();
+    const id = getParameterFromUrl("id").toString() || "513404666";
     let data = await getSearchByID(id);
     if (data.error) {
       setProduct(product);
       setFeath(true);
     } else {
       setProduct(data.results);
-      const colorInfo = await getColorInfo(data.results[0].artworkUrl100);
+      const colorInfo: any = await getColorInfo(data.results[0].artworkUrl100);
       setColor(colorInfo);
       setFeath(true);
     }
   }
 
+  const isFilm = () => {
+    return product[0].kind === "feature-movie" ? true : false;
+  };
+
   return (
     <div className={theme.theme ? "white" : "dark"}>
       <div className={"full-page"}>
         {isFeath ? (
-          <div class='page'>
+          <div className='page'>
             <div className='center'>
               <div
-                className={
-                  product[0].kind === "feature-movie"
-                    ? "poster-video"
-                    : "poster-sound"
-                }
+                className={isFilm() ? "poster-video" : "poster-sound"}
                 style={{
                   backgroundImage: `url(${product[0].artworkUrl100.replace(
                     "100x100bb",
@@ -91,14 +91,10 @@ export default function Product() {
                   </Typography>
                   <AddShoppingCart product={product[0]} />
                 </div>
-                <video controls name='media' className='video-container'>
+                <video controls className='video-container'>
                   <source
                     src={`${product[0].previewUrl}`}
-                    type={
-                      product[0].kind === "feature-movie"
-                        ? "video/x-m4v"
-                        : "audio/x-m4a"
-                    }
+                    type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                   />
                 </video>
               </div>
@@ -122,11 +118,7 @@ export default function Product() {
             <div className='center'>
               <div
                 id='poster'
-                className={
-                  product[0].kind === "feature-movie"
-                    ? "poster-video"
-                    : "poster-sound"
-                }
+                className={isFilm() ? "poster-video" : "poster-sound"}
                 style={{
                   backgroundImage: `url(${product[0].artworkUrl100.replace(
                     "100x100bb",
@@ -138,10 +130,8 @@ export default function Product() {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    paddingTop:
-                      product[0].kind === "feature-movie" ? "70vw" : "60vw",
-                    paddingBottom:
-                      product[0].kind === "feature-movie" ? "0vw" : "35vw",
+                    paddingTop: isFilm() ? "70vw" : "60vw",
+                    paddingBottom: isFilm() ? "0vw" : "35vw",
                     paddingLeft: 10,
                     paddingRight: 10,
                     background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.hex} 50%, ${color.hex} 100% )`
@@ -149,20 +139,11 @@ export default function Product() {
                 >
                   <video
                     controls
-                    name='media'
-                    className={
-                      product[0].kind === "feature-movie"
-                        ? "video-container"
-                        : "audio-container"
-                    }
+                    className={isFilm() ? "video-container" : "audio-container"}
                   >
                     <source
                       src={`${product[0].previewUrl}`}
-                      type={
-                        product[0].kind === "feature-movie"
-                          ? "video/x-m4v"
-                          : "audio/x-m4a"
-                      }
+                      type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                     />
                   </video>
 

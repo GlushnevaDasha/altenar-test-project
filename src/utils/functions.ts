@@ -22,9 +22,9 @@ export const getError = (code: number) => {
 };
 
 export const getParameterFromUrl = (param: string) => {
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var vars = url.searchParams.get(param);
+  var url_string: string = window.location.href;
+  var url: any = new URL(url_string);
+  var vars: string = url.searchParams.get(param);
   return vars;
 };
 
