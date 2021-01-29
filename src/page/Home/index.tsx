@@ -18,7 +18,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingBasket";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
-import Card from "../../components/Card";
+import HomeCard from "../../components/Cards/HomeCard";
 import { getSearchAll } from "../../utils/api";
 
 import "../../utils/styles/components/loader.css";
@@ -107,7 +107,7 @@ export default function Home() {
         {isFeath ? (
           <Grid container direction='row' justify='center' alignItems='center'>
             {mas.length !== 0 ? (
-              mas.map((item, index) => <Card key={index} object={item} />)
+              mas.map((item, index) => <HomeCard key={index} object={item} />)
             ) : (
               <Typography
                 component='h5'
