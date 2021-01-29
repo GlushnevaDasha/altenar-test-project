@@ -3,6 +3,7 @@ import FastAverageColor from "fast-average-color";
 import { ThemeContext, BasketContext } from "../../utils/context";
 import { getParameterFromUrl } from "../../utils/functions";
 import { getSearchByID } from "../../utils/api";
+import { getColorInfo } from "../../utils/functions";
 
 import { IconButton, Typography } from "@material-ui/core";
 
@@ -19,19 +20,13 @@ export default function Product() {
   const [color, setColor] = useState({});
   useEffect(() => {
     getData();
-    if (product.length !== 0) {
-      const fac = new FastAverageColor();
-
-      fac
-        .getColorAsync(product[0].artworkUrl100)
-        .then(colors => {
-          setColor(colors);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
+    getColorsInfo();
   }, [product.length]);
+
+  async function getColorsInfo() {
+    const colorInfo = await getColorInfo(product[0].artworkUrl100);
+    setColor(colorInfo);
+  }
 
   const [isFeath, setFeath] = useState(false);
 
@@ -49,8 +44,8 @@ export default function Product() {
   }
 
   return (
-    <div>
-      <div className={theme.theme ? "white full-page" : "dark full-page"}>
+    <div className={theme.theme ? "white" : "dark"}>
+      <div className={"full-page"}>
         {isFeath ? (
           <div class='page'>
             <div className='center'>
@@ -108,7 +103,7 @@ export default function Product() {
                       : product[0].collectionPrice ||
                         product[0].collectionPrice}
                     {" " + product[0].currency}
-                  </Typography>{" "}
+                  </Typography>
                   <IconButton
                     aria-label='previous'
                     className={theme.theme ? "" : "dark-text"}
@@ -119,7 +114,6 @@ export default function Product() {
                     <AddShoppingCartSharpIcon />
                   </IconButton>
                 </div>
-
                 <video controls name='media' className='video-container'>
                   <source
                     src={`${product[0].previewUrl}`}
@@ -173,7 +167,7 @@ export default function Product() {
                       product[0].kind === "feature-movie" ? "0vw" : "35vw",
                     paddingLeft: 10,
                     paddingRight: 10,
-                    background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.rgba} 50%, ${color.rgba} 100% )`
+                    background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.hex} 50%, ${color.hex} 100% )`
                   }}
                 >
                   <video
