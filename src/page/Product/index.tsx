@@ -10,6 +10,7 @@ import { AddShoppingCartSharp } from "../../asets/icons";
 import { ThemeButton, AddShoppingCart } from "../../components/IconButtons";
 
 import "../../utils/styles/page/product.css";
+import { Player } from "../../components/Player";
 
 export default function Product() {
   const theme = useContext(ThemeContext);
@@ -79,12 +80,13 @@ export default function Product() {
                   </Typography>
                   <AddShoppingCart product={product} />
                 </div>
-                <video controls className='video-container'>
+                <Player previewUrl={product.previewUrl} />
+                {/* <video controls className='video-container'>
                   <source
                     src={`${product.previewUrl}`}
                     type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                   />
-                </video>
+                </video> */}
               </div>
             </div>
             <div>
@@ -122,7 +124,8 @@ export default function Product() {
                     background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.hex} 50%, ${color.hex} 100% )`
                   }}
                 >
-                  <video
+                  <Player previewUrl={product.previewUrl} type={product.type} />
+                  {/* <video
                     controls
                     className={isFilm() ? "video-container" : "audio-container"}
                   >
@@ -130,7 +133,7 @@ export default function Product() {
                       src={`${product.previewUrl}`}
                       type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                     />
-                  </video>
+                  </video> */}
 
                   <div className='name-container'>
                     <Typography

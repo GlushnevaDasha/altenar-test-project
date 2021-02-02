@@ -30,13 +30,13 @@
   align-items: center;
 }
 
-.video-container {
+/* .video-container {
   width: 600px;
-}
+} */
 
-.audio-container {
+/* .audio-container {
   width: 300px;
-}
+} */
 
 .mobile-content-container {
   display: flex;
@@ -72,10 +72,10 @@
     background-size: contain;
   }
 
-  .video-container {
+  /* .video-container {
     width: 300px;
     margin-bottom: 10px;
-  }
+  } */
 
   .full-page {
     display: none;
