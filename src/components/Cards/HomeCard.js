@@ -13,7 +13,7 @@ import {
 import AddShoppingCartSharpIcon from "@material-ui/icons/AddShoppingCartSharp";
 import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 
-import "../utils/styles/components/card.css";
+import "../../utils/styles/components/card.css";
 
 export default function HomeCard(props) {
   const basket = useContext(BasketContext);

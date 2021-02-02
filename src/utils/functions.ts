@@ -22,6 +22,6 @@ export const getError = code => {
 export const getParameterFromUrl = param => {
   var url_string = window.location.href;
   var url = new URL(url_string);
-  var vars = url.searchParams.get(param);
+  var vars: string = url.searchParams.get(param);
   return vars;
 };
