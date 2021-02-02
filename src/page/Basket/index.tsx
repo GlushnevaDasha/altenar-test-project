@@ -2,10 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BasketContext, ThemeContext } from "../../utils/context";
 import BasketCard from "../../components/Cards/BasketCard";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { IconButton, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { ThemeButton, BackButton } from "../../components/IconButtons";
 
 import "../../utils/styles/page/basket.css";
 export default function BasketPage() {
@@ -30,12 +28,7 @@ export default function BasketPage() {
       <div className='page'>
         <div className='header'>
           <Link to='/'>
-            <IconButton
-              aria-label='menu'
-              className={theme.theme ? "" : "dark-text"}
-            >
-              <ArrowBackIcon />
-            </IconButton>
+            <BackButton />
           </Link>
           <Typography
             component='h5'
@@ -44,15 +37,7 @@ export default function BasketPage() {
           >
             Kорзина
           </Typography>
-          <IconButton
-            aria-label='menu'
-            className={theme.theme ? "" : "dark-text"}
-            onClick={() => {
-              theme.saveTheme(!theme.theme);
-            }}
-          >
-            {theme.theme ? <BrightnessLowIcon /> : <BrightnessHighIcon />}
-          </IconButton>
+          <ThemeButton />
         </div>
         <div>
           {basket.basket.length !== 0 ? (

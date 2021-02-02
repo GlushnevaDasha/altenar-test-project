@@ -13,10 +13,8 @@ import {
   Badge,
   Typography
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingBasket";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import { Search, ShoppingCart } from "../../asets/icons";
+import { ThemeButton } from "../../components/IconButtons";
 
 import HomeCard from "../../components/Cards/HomeCard";
 import { getSearchAll } from "../../utils/api";
@@ -76,7 +74,7 @@ export default function Home() {
           variant='outlined'
           color='primary'
           onClick={() => getData()}
-          startIcon={<SearchIcon />}
+          startIcon={<Search />}
           style={{ marginLeft: 10 }}
         >
           <div className='buttom-text'>Поиск</div>
@@ -88,20 +86,12 @@ export default function Home() {
             className={theme.theme ? "" : "dark-text"}
           >
             <StyledBadge badgeContent={basket.basket.length} color='secondary'>
-              <ShoppingCartIcon />
+              <ShoppingCart />
             </StyledBadge>
           </IconButton>
         </Link>
 
-        <IconButton
-          aria-label='menu'
-          className={theme.theme ? "" : "dark-text"}
-          onClick={() => {
-            theme.saveTheme(!theme.theme);
-          }}
-        >
-          {theme.theme ? <BrightnessLowIcon /> : <BrightnessHighIcon />}
-        </IconButton>
+        <ThemeButton />
       </div>
       <div className={mas.length === 0 || !isFeath ? "page" : ""}>
         {isFeath ? (

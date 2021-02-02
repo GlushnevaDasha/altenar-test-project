@@ -1,4 +1,6 @@
-export const getError = code => {
+import FastAverageColor from "fast-average-color";
+
+export const getError = (code: number) => {
   switch (code) {
     case 401:
       return {
@@ -19,9 +21,21 @@ export const getError = code => {
   }
 };
 
-export const getParameterFromUrl = param => {
-  var url_string = window.location.href;
-  var url = new URL(url_string);
+export const getParameterFromUrl = (param: string) => {
+  var url_string: string = window.location.href;
+  var url: any = new URL(url_string);
   var vars: string = url.searchParams.get(param);
   return vars;
+};
+
+export const getColorInfo = (imgUrl: string) => {
+  const fac = new FastAverageColor();
+  return fac
+    .getColorAsync(imgUrl)
+    .then(colors => {
+      return { isLight: colors.isLight, hex: colors.hex };
+    })
+    .catch(e => {
+      console.log(e);
+    });
 };

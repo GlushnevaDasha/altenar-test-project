@@ -10,8 +10,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-import ClearIcon from "@material-ui/icons/Clear";
-import InfoSharpIcon from "@material-ui/icons/InfoSharp";
+import { Clear, InfoSharp } from "../../asets/icons";
 
 import "../../utils/styles/components/basketCard.css";
 
@@ -49,7 +48,7 @@ export default function BasketCard(props) {
                 aria-label='previous'
                 className={theme.theme ? "" : "dark-text"}
               >
-                <InfoSharpIcon />
+                <InfoSharp />
               </IconButton>
             </Link>
           </div>
@@ -74,7 +73,7 @@ export default function BasketCard(props) {
                 basket.deleteBasket(props.index);
               }}
             >
-              <ClearIcon />
+              <Clear />
             </IconButton>
           </div>
         </CardContent>
@@ -112,7 +111,7 @@ export default function BasketCard(props) {
                 aria-label='previous'
                 className={theme.theme ? "" : "dark-text"}
               >
-                <InfoSharpIcon />
+                <InfoSharp />
               </IconButton>
             </Link>
             <Typography
@@ -132,7 +131,7 @@ export default function BasketCard(props) {
                 basket.deleteBasket(props.index);
               }}
             >
-              <ClearIcon />
+              <Clear />
             </IconButton>
           </div>
         </CardContent>
