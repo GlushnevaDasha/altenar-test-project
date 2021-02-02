@@ -1,5 +1,5 @@
 import { getError } from "./functions";
-
+import { createProduct } from "./models/product";
 const URL = `https://itunes.apple.com/`;
 
 const buildHeaders = (token, method, isFile = false) => {
@@ -83,5 +83,10 @@ export const getSearchAll = async data => {
 };
 
 export const getSearchByID = async id => {
-  return await apiRequestWithBody("GET", `${URL}lookup?country=ru&id=${id}`);
+  let data = await apiRequestWithBody(
+    "GET",
+    `${URL}lookup?country=ru&id=${id}`
+  );
+  let product = createProduct(data.results[0]);
+  return product;
 };

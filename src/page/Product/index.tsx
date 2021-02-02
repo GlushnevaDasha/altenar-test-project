@@ -29,19 +29,14 @@ export default function Product() {
     setFeath(false);
     const id = getParameterFromUrl("id").toString() || "513404666";
     let data = await getSearchByID(id);
-    if (data.error) {
-      setProduct(product);
-      setFeath(true);
-    } else {
-      setProduct(data.results);
-      const colorInfo: any = await getColorInfo(data.results[0].artworkUrl100);
-      setColor(colorInfo);
-      setFeath(true);
-    }
+    setProduct(data);
+    const colorInfo: any = await getColorInfo(data.imgUrl);
+    setColor(colorInfo);
+    setFeath(true);
   }
 
   const isFilm = () => {
-    return product[0].kind === "feature-movie" ? true : false;
+    return product.type === "feature-movie" ? true : false;
   };
 
   return (
@@ -53,7 +48,7 @@ export default function Product() {
               <div
                 className={isFilm() ? "poster-video" : "poster-sound"}
                 style={{
-                  backgroundImage: `url(${product[0].artworkUrl100.replace(
+                  backgroundImage: `url(${product.imgUrl.replace(
                     "100x100bb",
                     "450x450bb"
                   )})`
@@ -66,7 +61,7 @@ export default function Product() {
                     variant='h6'
                     className={theme.theme ? "text" : "dark-text text"}
                   >
-                    {product[0].trackName}
+                    {product.name}
                   </Typography>
                   <ThemeButton />
                 </div>
@@ -75,7 +70,7 @@ export default function Product() {
                   color='textSecondary'
                   className={theme.theme ? "text" : "dark-text text"}
                 >
-                  {product[0].artistName}
+                  {product.autor}
                 </Typography>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Typography
@@ -83,17 +78,13 @@ export default function Product() {
                     color='textSecondary'
                     className={theme.theme ? "" : "dark-text"}
                   >
-                    {product[0].trackPrice > 0
-                      ? product[0].trackPrice
-                      : product[0].collectionPrice ||
-                        product[0].collectionPrice}
-                    {" " + product[0].currency}
+                    {product.price + " " + product.currency}
                   </Typography>
-                  <AddShoppingCart product={product[0]} />
+                  <AddShoppingCart product={product} />
                 </div>
                 <video controls className='video-container'>
                   <source
-                    src={`${product[0].previewUrl}`}
+                    src={`${product.previewUrl}`}
                     type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                   />
                 </video>
@@ -105,7 +96,7 @@ export default function Product() {
                 color='textSecondary'
                 className={theme.theme ? "" : "dark-text"}
               >
-                {product[0].longDescription}
+                {product.description}
               </Typography>
             </div>
           </div>
@@ -120,7 +111,7 @@ export default function Product() {
                 id='poster'
                 className={isFilm() ? "poster-video" : "poster-sound"}
                 style={{
-                  backgroundImage: `url(${product[0].artworkUrl100.replace(
+                  backgroundImage: `url(${product.imgUrl.replace(
                     "100x100bb",
                     "450x450bb"
                   )})`
@@ -142,7 +133,7 @@ export default function Product() {
                     className={isFilm() ? "video-container" : "audio-container"}
                   >
                     <source
-                      src={`${product[0].previewUrl}`}
+                      src={`${product.previewUrl}`}
                       type={isFilm() ? "video/x-m4v" : "audio/x-m4a"}
                     />
                   </video>
@@ -153,7 +144,7 @@ export default function Product() {
                       variant='h6'
                       className={color.isLight ? "" : "dark-text"}
                     >
-                      {product[0].trackName}
+                      {product.name}
                     </Typography>
                   </div>
                   <Typography
@@ -161,7 +152,7 @@ export default function Product() {
                     color='textSecondary'
                     className={color.isLight ? "text" : "dark-text text"}
                   >
-                    {product[0].artistName}
+                    {product.autor}
                   </Typography>
                   <div
                     style={{
@@ -175,17 +166,13 @@ export default function Product() {
                       color='textSecondary'
                       className={color.isLight ? "text" : "dark-text text"}
                     >
-                      {product[0].trackPrice > 0
-                        ? product[0].trackPrice
-                        : product[0].collectionPrice ||
-                          product[0].collectionPrice}
-                      {" " + product[0].currency}
+                      {product.price + " " + product.currency}
                     </Typography>
                     <IconButton
                       aria-label='previous'
                       className={color.isLight ? "" : "dark-text text"}
                       onClick={() => {
-                        basket.saveBasket(product[0]);
+                        basket.saveBasket(product);
                       }}
                     >
                       <AddShoppingCartSharp />
@@ -197,7 +184,7 @@ export default function Product() {
                     color='textSecondary'
                     className={color.isLight ? "" : "dark-text"}
                   >
-                    {product[0].longDescription}
+                    {product.description}
                   </Typography>
                 </div>
               </div>
