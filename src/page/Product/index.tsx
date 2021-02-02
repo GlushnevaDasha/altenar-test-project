@@ -18,16 +18,13 @@ export default function Product() {
   const [color, setColor] = useState<any>({});
   useEffect(() => {
     getData();
-    getColorsInfo();
   }, [product.length]);
-
-  async function getColorsInfo() {}
 
   const [isFeath, setFeath] = useState(false);
 
   async function getData() {
     setFeath(false);
-    const id = getParameterFromUrl("id").toString() || "513404666";
+    const id = getParameterFromUrl("id").toString();
     let data = await getSearchByID(id);
     setProduct(data);
     const colorInfo: any = await getColorInfo(data.imgUrl);
@@ -118,13 +115,10 @@ export default function Product() {
                 }}
               >
                 <div
+                  className='mobile-content-container'
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
                     paddingTop: isFilm() ? "70vw" : "60vw",
                     paddingBottom: isFilm() ? "0vw" : "35vw",
-                    paddingLeft: 10,
-                    paddingRight: 10,
                     background: `linear-gradient(rgba(0, 0, 0, 0) 25% ,${color.hex} 50%, ${color.hex} 100% )`
                   }}
                 >

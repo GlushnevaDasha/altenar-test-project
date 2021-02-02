@@ -38,6 +38,13 @@
   width: 300px;
 }
 
+.mobile-content-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10;
+  padding-right: 10;
+}
+
 .ls0 {
   letter-spacing: 0em !important;
 }
