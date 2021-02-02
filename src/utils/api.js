@@ -87,18 +87,6 @@ export const getSearchByID = async id => {
     "GET",
     `${URL}lookup?country=ru&id=${id}`
   );
-  let product = createProduct(
-    data.results[0].trackId, //id
-    data.results[0].trackName || data.results[0].collectionName, // name
-    data.results[0].artistName, //autor
-    data.results[0].artworkUrl100, //imgUrl
-    data.results[0].trackPrice > 0 //price
-      ? data.results[0].trackPrice
-      : data.results[0].collectionPrice || data.results[0].collectionPrice,
-    data.results[0].currency, //currency
-    data.results[0].previewUrl, //previewUrl
-    data.results[0].kind, //type
-    data.results[0].longDescription //description
-  );
+  let product = createProduct(data.results[0]);
   return product;
 };
